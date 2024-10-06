@@ -1,0 +1,11 @@
+version: '0.0.1pre'
+services:
+  cv_server:
+    build:
+      ./cv/server
+    ports:
+      - 8001:8001
+    devices:
+      - /dev/video0:/dev/video0
+    restart:
+      no
