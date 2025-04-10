@@ -55,8 +55,8 @@ void setup() {
   digitalWrite(input3, HIGH);
   digitalWrite(input4, LOW);
 
-  attachInterrupt(optA - 2, getInterruptDtA, CHANGE);
-  attachInterrupt(optB - 2, getInterruptDtB, CHANGE);
+  attachInterrupt(digitalPinToInterrupt(optA), getInterruptDtA, CHANGE);
+  attachInterrupt(digitalPinToInterrupt(optB), getInterruptDtB, CHANGE);
 }
 
 void loop() {
@@ -124,8 +124,11 @@ float computeRpmA(float countOptChanges) {
   if (interruptDtA == 0) {
     return 0.0;
   }
+  
   float RPM = (1.0 / countOptChanges) / ((float)interruptDtA / 60000.0);
+  detachInterrupt(digitalPinToInterrupt(optA));
   interruptDtA = 0;
+  attachInterrupt(digitalPinToInterrupt(optA), getInterruptDtA, CHANGE);
   return RPM;
 }
 
@@ -133,8 +136,11 @@ float computeRpmB(float countOptChanges) {
   if (interruptDtB == 0) {
     return 0.0;
   }
+  
   float RPM = (1.0 / countOptChanges) / ((float)interruptDtB / 60000.0);
+  detachInterrupt(digitalPinToInterrupt(optB));
   interruptDtB = 0;
+  attachInterrupt(digitalPinToInterrupt(optB), getInterruptDtB, CHANGE);
   return RPM;
 }
 
