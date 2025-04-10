@@ -29,8 +29,8 @@ const uint32_t controlDt = 100;
 // var
 volatile uint32_t interruptTimeA = 0;
 volatile uint32_t interruptTimeB = 0;
-uint32_t interruptDtA = 0;
-uint32_t interruptDtB = 0;
+volatile uint32_t interruptDtA = 0;
+volatile uint32_t interruptDtB = 0;
 float integralA = 0.0;
 float integralB = 0.0;
 float prevErrA = 0.0;
